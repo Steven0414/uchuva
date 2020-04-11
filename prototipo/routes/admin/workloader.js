@@ -8,18 +8,18 @@ module.exports = function(app){
   app.use('/admin/workloader', router);
   router.get('/', isAuthenticated, function(req, res) {
     Workloader.find({})
-      .then((workloaders) => res.render("admin/workloader/index.pug", {workloaders: workloaders}));
+      .then((workloaders) => res.render("admin/workloader/index.pug", {workloaders: workloaders, user:req.user}));
   });
   router.get('/show/:id', isAuthenticated, function(req, res) {
     Workloader.findById(req.params.id)
-      .then((workloader) => res.render("admin/workloader/detalles.pug", {workloader: workloader}));
+      .then((workloader) => res.render("admin/workloader/detalles.pug", {workloader: workloader, user:req.user}));
   });
   router.get('/add', isAuthenticated, function(req, res) {
-    res.render("admin/workloader/agregar.pug");
+    res.render("admin/workloader/agregar.pug",{user:req.user});
   });
   router.get('/edit/:id', isAuthenticated, function(req, res) {
     Workloader.findById(req.params.id)
-      .then((workloader) => res.render("admin/workloader/actualizar.pug", {workloader: workloader}));
+      .then((workloader) => res.render("admin/workloader/actualizar.pug", {workloader: workloader, user:req.user}));
   });
   router.post('/create', isAuthenticated, function(req, res) {
     Workloader.create(req.body)

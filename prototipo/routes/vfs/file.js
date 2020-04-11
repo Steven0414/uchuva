@@ -104,7 +104,7 @@ module.exports = function(app) {
     app.use('/', router);
 
     router.get('/filemanager', isAuthenticated, function(req, res) {
-        res.render('filemanager');
+        res.render('filemanager',{user: req.user});
     });
 
 

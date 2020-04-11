@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -6,8 +6,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand hidden-xs" ng-href="/user">< Volver</a>
+      </button>      
+      <a class="text-success mt-2" ng-href="/user">Inicio</a><a href="#" class="text-success mt-2"> / Administrador de archivos</a>
       <!--<a class="navbar-brand hidden-xs" href="" ng-click="fileNavigator.goTo(-1)">{{config.appName}}</a>-->
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -34,10 +34,10 @@
           <li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="changeLanguage('sk')">{{"slovak" | translate}}</a></li>-->
         </ul>
 
-        <button class="btn btn-default btn-sm" ng-click="$parent.setTemplate('main-icons.html')" ng-show="$parent.viewTemplate !== 'main-icons.html'" title="{{'icons' | translate}}">
+        <button style="height: 2.8rem" class="btn btn-default btn-sm" ng-click="$parent.setTemplate('main-icons.html')" ng-show="$parent.viewTemplate !== 'main-icons.html'" title="{{'icons' | translate}}">
             <i class="glyphicon glyphicon-th-large"></i>
         </button>
-        <button class="btn btn-default btn-sm" ng-click="$parent.setTemplate('main-table.html')" ng-show="$parent.viewTemplate !== 'main-table.html'" title="{{'list' | translate}}">
+        <button style="height: 2.8rem" class="btn btn-default btn-sm" ng-click="$parent.setTemplate('main-table.html')" ng-show="$parent.viewTemplate !== 'main-table.html'" title="{{'list' | translate}}">
             <i class="glyphicon glyphicon-th-list"></i>
         </button>
 

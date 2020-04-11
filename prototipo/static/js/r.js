@@ -46,25 +46,28 @@ function rederizarArg(param) {
   var mopciones = $("#mopciones");
   render(param, document.getElementById("opciones"));
   mopciones.empty();
-  mopciones.append('<p>Times</p>');
+  mopciones.append('<hr>');
+  mopciones.append('<p><b>Times</b></p>');
   var times  = param.times || 1;
-  mopciones.append('<li><input type="number" name="times" min="1" id="times" value='+times+'></li>');
-  mopciones.append('<p>WorkingDir</p>');
+  mopciones.append('<li><input style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important" type="number" class="form-control px-2" name="times" min="1" id="times" value='+times+'></li>');
+  mopciones.append('<hr>');
+  mopciones.append('<p><b>WorkingDir</b></p>');
   var wd  = param.wd || "";
-  mopciones.append('<li><input type="text" name="wd" id="wd" value="'+wd+'"></li>');
-  mopciones.append('<button id="gencmd">Generate command</button>');
-  mopciones.append('<p>Files</p>');
-  mopciones.append('<button class="nada" data-toggle="modal" data-target=".bs-example-modal-lg">Add files</button>');
-  if(param.file && param.file.length > 0){
+  mopciones.append('<li><input style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important" type="text" class="form-control" name="wd" id="wd" value="'+wd+'"></li>');
+  mopciones.append('<button id="gencmd" class="btn btn-default">Generar comando</button>');
+  mopciones.append('<hr>');
+  mopciones.append('<p><b>Archivos</b></p>');
+  mopciones.append('<button class="nada btn btn-primary" style="margin-bottom: 1rem" data-toggle="modal" data-target=".bs-example-modal-lg">Añadir archivos</button>');    
+  if(param.file && param.file.length > 0){  	
     param.file.forEach(function(archivo,i){
       if(typeof archivo.entrada === "string"){
         archivo.entrada =  archivo.entrada === "true";
-      }
-      mopciones.append("<li data-type="+archivo.type+" data-id="+i+">" + archivo.filename +
-                      (archivo.entrada? '<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>':
-                       ' <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>') +
-                      ' <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +" </li>");
-    });
+      }      
+      mopciones.append("<li style='color: black; margin-left: 2rem' data-type="+archivo.type+" data-id="+i+">" + archivo.filename +
+                      (archivo.entrada? '<span class="glyphicon glyphicon-menu-up" style="margin-left: 2rem; color: black" aria-hidden="true"></span>':
+                       ' <span class="glyphicon glyphicon-menu-down" style="margin-left: 2rem; color: black" aria-hidden="true"></span>') +
+                      ' <span class="glyphicon glyphicon-remove text-danger" style="margin-left: 1rem; " aria-hidden="true"></span>' +" </li>");      
+    });    
   }
 }
 
@@ -94,7 +97,8 @@ function rederizarProyecto(){
     var values = workloaders && workloaders.reduce(function(init, wl){
       return init+'<option value="'+wl+'">'+wl+'</option>';
     },"");
-    opciones.append('<select class="form-control.input-lg" id="loadManager" name="loadmanager">'+values+'</select></br>');
+    opciones.append('<p><b>WorkLoader</b></p>')
+    opciones.append('<select class="form-control" style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important" id="loadManager" name="loadmanager">'+values+'</select></br>');
     $("#loadManager").val(selectedwl).change();
   }
   $('#plantillaPrograma').hide();

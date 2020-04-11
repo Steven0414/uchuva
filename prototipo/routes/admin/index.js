@@ -5,6 +5,6 @@ var router = express.Router();
 module.exports = function(app){
   app.use('/admin', router);
   router.get('/index', isAuthenticated, function(req, res) {
-    res.render("admin/index.pug");
+    res.render("admin/index.pug",{user: req.user});
   });
 };

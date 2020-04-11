@@ -7,7 +7,7 @@ head
   meta(name='author', content='Carlos')
   title Uchuva
   link(href='vendor/bootstrap/bootstrap.min.css', rel='stylesheet', media='screen')
-  link(href='css/jumbotron-narrow.css', rel='stylesheet')
+  link(href='css/jumbotron-narrow.css', rel='stylesheet')  
   script(src='vendor/html5shiv.min.js')
   script(src='vendor/respond.min.js')
 .container
@@ -19,33 +19,45 @@ head
              a(href='/user')= __('Home')
         else
            li(role='presentation')
-             a(href='/register')= __('Registro')
+             a.btn.btn-success.text-success(href='/register')= __('Registro')
            li(role='presentation')
              a(href='/login')= __('Entrar')
-    h3.text-muted Uchuva
+    img#img-fluid(src='./logo.png', style="width: 15rem")
   .jumbotron
-    h1#titulo Uchuva
+    img#img-fluid(src='./logo.png', style="width: 40rem")
+    hr
     p(class="lead")= __('description')
+    hr
     p
       a.btn.btn-lg.btn-success(href='/register', role='button')= __('Registro')
   .row.marketing
-    .col-lg-6
-      h4 Workloaders
+    .col-lg-6.mb-4      
+      h4.text-success Workloaders
       p
         | #{__('Integración con HTCondor, Slurm, Torque y Openlava')}
-      h4 Apps
+      hr.text-warning
+    .col-lg-6.mb-4
+      h4.text-success.font-weight-bold Apps
       p
         | #{__('Numerosas aplicaciones pueden ser configuradas usando un formulario')}
-      h4 SSH
+      hr.text-warning
+    .col-lg-6.mb-4
+      h4.text-success SSH
       p #{__('Conexión SSH para sitios remotos')}
-    .col-lg-6
-      h4 Archivo
+      hr.text-warning
+    .col-lg-6.mb-4
+      h4.text-success Archivo
       p
         | #{__('Todos los archivos en un solo lugar')}
-      h4 Terminal
+      hr.text-warning
+    .col-lg-6.mb-4
+      h4.text-success Terminal
       p
         | #{__('Tienes a tu disposición una terminal virtual')}
-      h4 Workflow
+      hr.text-warning
+    .col-lg-6.mb-4
+      h4.text-success Workflow
       p #{__('Modela tus experimentos usando grafos')}
+      hr.text-warning
   footer.footer
-    p © 2017.
+    p © 2020.

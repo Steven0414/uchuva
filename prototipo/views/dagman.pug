@@ -5,34 +5,45 @@ html
     link(rel='stylesheet', href='css/tesis.css')
     link(rel='stylesheet', href='vendor/introjs/introjs.min.css')
     link(rel='stylesheet', href='vendor/nprogress/nprogress.css')
+    script(src='js/ayuda.js')
     title= title
   body
-    #menu
-      #handle
-      #autohandle
-      .divscroll
-        p
-          select#plantillaPrograma.form-control.input
-        ul#opciones
-        ul#mopciones
-    #back
-      a(href="/user") < Ir atras
-    #toolbox
-      input#hidden-file-upload(type='file')
-      input#upload-input(type='image', title='Subir', src='images/upload.png', alt='upload graph')
-      input#run-input(type='image', title='Ejecutar', src='images/run.png', alt='run graph')
-      input#save-input(type='image', title='Guardar', src='images/save.png', alt='save graph')
-      input#download-input(type='image', title='Descargar', src='images/download.png', alt='download graph')
-      input#delete-graph(type='image', title='Borrar', src='images/trash.png', alt='delete graph')
-      input#openMenu(type='image', title='Menu', src='images/menu.png', alt='menu')
-      input#doc(type='image', title='Doc', src='images/doc.png', alt='documentation')
+    .container-fluid
+      .row
+        include ./navbar.pug
+      .row
+        br
+        .col-sm-4.col-md-4.col-lg-4(style="padding-left: 4rem")
+          a.text-success(href='/user')= __('Inicio / ')          
+          a.text-success(href='#')= title
+      hr
+      .row  
+        #menu(style="top: 8.2%!important; height: 92.4%; background-color: rgba(185,191,6)!important")
+          #handle(style="background-color: rgba(242,143,22)!important; left: -20px!important; width: 4rem; color: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);")
+            p(style="writing-mode: vertical-lr; transform: rotate(180deg); color: white; margin-top: 1rem")=__('Arrastra para Ampliar / Reducir')
+          #autohandle(style="background-color: rgba(127,140,22)!important; width: 3rem")
+            p(style="writing-mode: vertical-lr; transform: rotate(180deg); color: white; margin-top: 7rem")=__('Presiona para Ocultar')
+          .divscroll
+            p
+              select#plantillaPrograma.form-control(style = "background-color: white!important; border-radius: 6px; padding-left: 1rem!important; margin-left: 4rem; max-width: 80%")
+            ul#opciones
+            ul#mopciones        
+        #toolbox(style="border-radius: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: white")
+          input#hidden-file-upload(type='file')
+          input#upload-input(type='image', title='Subir', src='images/upload.png', alt='upload graph', style="opacity: 1")
+          input#run-input(type='image', title='Ejecutar', src='images/run.png', alt='run graph', style="opacity: 1")
+          input#save-input(type='image', title='Guardar', src='images/save.png', alt='save graph', style="opacity: 1")
+          input#download-input(type='image', title='Descargar', src='images/download.png', alt='download graph', style="opacity: 1")
+          input#delete-graph(type='image', title='Borrar', src='images/trash.png', alt='delete graph', style="opacity: 1")
+          input#openMenu(type='image', title='Menu', src='images/menu.png', alt='menu' style="margin-left: 6rem; opacity: 1")
+          input#doc(type='image', title='Instrucciones', src='images/doc.png', alt='documentation', style="opacity: 1")
 
     #cmdModal.modal.fade(role='dialog')
       .modal-dialog
         .modal-content
           .modal-header
             button.close(type='button', data-dismiss='modal') ×
-            h4.modal-title Comand
+            h4.modal-title Comando
           .modal-body
             p#cmd
           .modal-footer
@@ -66,6 +77,61 @@ html
             .modal-footer
                 button.btn(data-dismiss='modal', aria-hidden='true') Cancelar
                 button#filemB.btn.btn-primary Seleccionar
+
+    .modal.fade#ayudaModal(tabindex="-1", role="dialog")
+      .modal-dialog.modal-lg(role="document")
+        .modal-content
+          .modal-header
+            button(type="button", class="close", data-dismiss="modal")=__('x')
+            h3.modal-title=__('Ayuda del Portal Científico')        
+          .modal-body
+            .row
+              .col-lg-8-col-md-8.col-sm-8
+                h4#headerAyuda              
+              .col-lg-4.col-md-4.col-sm-4.text-right
+                .btn.btn-warning.text-white#buttonAyuda(onclick="mostrarAyuda('ayuda')", style="margin-right: 2rem")=__('Ayuda')
+                .btn.btn-primary.text-white#buttonGlosario(onclick="mostrarAyuda('glosario')")=__('Glosario')
+            hr
+            .row
+              .col-lg-12.col-md-12.col-sm-12#ayuda(style="display: none")
+                .row
+                  .col-lg-12.col-md-12.col-sm-12.text-left
+                    p.text-left=__('Te encuentras en la interfaz de modelado de WorkFlow / Dag. Podrás encontrar definiciones clave en la pestaña "Glosario".')                    
+                    p.text-left=__('La barra vertical del lado derecho te ofrece las opciones necesarias para realizar operaciones sobre los elementos del diagrama, sin embargo, esta cambiará en función de que haya un nodo seleccionado o no.')
+                    br
+                    h5=__('Opciones sin un nodo seleccionado')
+                    br
+                .row
+                  .col-lg-4.col-md-4.col-sm-4.text-left
+                    p.text-left=__('WorkLoader')
+                  .col-lg-8.col-md-8.col-sm-8.text-left
+                    p.text-left=__('Te permite escoger sobre que WorkLoad Manager (Gestor de colas de trabajo) ejecutar el Dag.')
+                .row
+                  .col-lg-12.col-md-12.col-sm-12.text-left
+                    h5=__('Opciones con un nodo seleccionado')
+                    br
+                .row
+                  .col-lg-4.col-md-4.col-sm-4.text-left
+                    p.text-left=__('Programa')
+                  .col-lg-8.col-md-8.col-sm-8.text-left
+                    p.text-left=__('Te permite escoger el programa que ejecutará el Nodo seleccionado.')
+                    p.text-left=__('Seleccionar un programa hará que se carguen sus opciones disponibles en la zona inferior a este selector.')                    
+                .row
+                  .col-lg-4.col-md-4.col-sm-4.text-left
+                    p.text-left=__('Times')
+                  .col-lg-8.col-md-8.col-sm-8.text-left
+                    p.text-left=__('Número de veces que se ejecutará el programa en el Nodo seleccionado.')
+                .row
+                  .col-lg-4.col-md-4.col-sm-4.text-left
+                    p.text-left=__('Working Dir')
+                  .col-lg-8.col-md-8.col-sm-8.text-left
+                    p.text-left=__('Ruta desde la cual se invocará el programa.')              
+                .row
+                  .col-lg-4.col-md-4.col-sm-4.text-left
+                    p.text-left=__('Archivos')
+                  .col-lg-8.col-md-8.col-sm-8.text-left
+                    p.text-left=__('Te permite añadir archivos insumo al Nodo seleccionado.') 
+              include ./glosario.pug
 
     script(src='vendor/d3.v3.js', charset='utf-8')
     script(src='vendor/FileSaver.min.js')
@@ -164,28 +230,28 @@ script(type='text/javascript').
       intro.setOptions({
         steps: [
           {
-            intro: "Welcome to Uchuva, lets create a workflow!"
+            intro: "Bienvenido a Uchuva, vamos a crear un workflow!"
           },
           {
-            intro: "Press Shift + Click in the canvas and add a Node (Add all the nodes you want)"
+            intro: "Presiona Shift + Click in the lienzo y añade un Nodo (¡Agrega todos los Nodos que quieras!)"
           },
           {
-            intro: "Press Shift and drag from a node to another in order to create an edge",
+            intro: "Presiona Shift y arrastra de un Nodo a otro para crear una Arista",
             position: 'right'
           },
           {
             element: document.querySelector('#openMenu'),
-            intro: 'Select a Node and choose, in the side menu, a software to execute by editing the values.',
+            intro: 'Selecciona un Nodo y escoge, en el menú lateral, un programa a ejecutar editando los valores.',
             position: 'top'
           },
           {
             element: document.querySelector('#save-input'),
-            intro: "When you finish editing your dag, click in the save button",
+            intro: "Cuando termines de editar tu Dag, presiona el botón de guardado.",
             position: 'top'
           },
           {
             element: document.querySelector('#run-input'),
-            intro: 'When you finish editing your dag, click in the run button.',
+            intro: 'Cuando termines de editar tu Dag, presiona el botón Ejecutar.',
             position: 'top'
           }
         ]

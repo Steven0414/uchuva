@@ -27,6 +27,8 @@
 }
 .divscroll p, .divscroll h1, .divscroll h5, .divscroll li, .divscroll label{
     color : #FFF;
+    font-weight: 300;
+    margin-bottom: 1rem;
 }
 #plantillaPrograma {
     background-color: white;

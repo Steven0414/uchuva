@@ -22,14 +22,14 @@ module.exports = function(app){
   app.use('/admin/software', router);
   router.get('/', isAuthenticated, function(req, res) {
     Software.find({})
-      .then((softwares) => res.render("admin/software/index.pug", {softwares: softwares}));
+      .then((softwares) => res.render("admin/software/index.pug", {softwares: softwares, user:req.user}));
   });
   router.get('/show/:id', isAuthenticated, function(req, res) {
     Software.findById(req.params.id)
-      .then((software) => res.render("admin/software/detalles.pug", {software: software}));
+      .then((software) => res.render("admin/software/detalles.pug", {software: software, user:req.user}));
   });
   router.get('/add', isAuthenticated, function(req, res) {
-    res.render("admin/software/agregar.pug");
+    res.render("admin/software/agregar.pug",{user:req.user});
   });
   router.get('/toggle/:id', isAuthenticated, function(req, res) {
       Software.findById(req.params.id).then(function(software){
@@ -42,7 +42,7 @@ module.exports = function(app){
   router.get('/edit/:id', isAuthenticated, function(req, res) {
       Software.findById(req.params.id).then(function(software){
            fs.readFile(path.join(software.path,software.filename), function(err, softwareData){
-               res.render("admin/software/actualizar.pug", {software: software, softwareData: softwareData});
+               res.render("admin/software/actualizar.pug", {software: software, softwareData: softwareData, user:req.user});
            });
       });
   });

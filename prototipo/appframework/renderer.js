@@ -20,10 +20,13 @@ function render(programa, node) {
 function renderizarOpciones(opc) {
     var contenedor = document.createElement("fieldset");
     var programas = document.createElement("select");
+    programas.className = "form-control";
+    programas.style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important; margin-bottom: 0.5rem";
     programas.id = opc.id;
     var sumador = document.createElement("label");
-    sumador.innerHTML = "+";
-    sumador.classList.add('add');
+    sumador.innerHTML = "Añadir";
+    sumador.className = 'add btn btn-sm btn-primary';
+    sumador.style = 'margin-right: 2rem';
     sumador.dataset.for = opc.id;
     var br = document.createElement("br");
     var id = 0;
@@ -43,9 +46,9 @@ function renderizarOpciones(opc) {
         valor.id = opc.id + "." + i++;
         var opcion = renderizarArgumento(valor);
         var eliminar = document.createElement("label");
-        eliminar.innerHTML = "-";
+        eliminar.innerHTML = "Eliminar";
         eliminar.dataset.for = valor.id;
-        eliminar.classList.add('remove');
+        eliminar.className = 'remove btn btn-sm btn-danger';        
         contenedor.appendChild(eliminar);
         contenedor.appendChild(opcion);
         contenedor.appendChild(br);
@@ -59,30 +62,33 @@ function renderizarArgumento(options) {
     }
     var contenedor = document.createElement("fieldset");
     var nombre = document.createElement("label");
-    nombre.innerHTML = options.nombroOpt;
+    nombre.innerHTML = options.nombroOpt;    
     var br = document.createElement("br");
     var multiple;
     if (options.multiple) {
         multiple = document.createElement("label");
         multiple.innerHTML = "+";
-        multiple.classList.add('add');
+        multiple.className = 'add btn btn-sm btn-primary';
+        multiple.style = "margin-bottom: 0px; margin-left: 3rem";
         multiple.dataset.for = options.id;
     }
     contenedor.appendChild(nombre);
     if (options.multiple) {
         contenedor.appendChild(multiple);
     }
-    contenedor.appendChild(br);
     var entrada;
     if (options.type === "bool") {
         entrada = document.createElement("input");
         entrada.type = "checkbox";
+        entrada.style = "margin-left: 2rem";
         entrada.id = options.id;
         if (options.value)
             entrada.checked = options.value;
         contenedor.appendChild(entrada);
     } else if (options.type === "area") {
         entrada = document.createElement("textarea");
+        entrada.className = "form-control";
+        entrada.style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important";
         entrada.cols = "50";
         entrada.rows = "10";
         entrada.id = options.id;
@@ -93,6 +99,8 @@ function renderizarArgumento(options) {
         contenedor.appendChild(entrada);
     } else if (options.type === "domain") {
         entrada = document.createElement("select");
+        entrada.className = "form-control";
+        entrada.style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important";
         entrada.id = options.id;
         options.domainElems.forEach(function(programa) {
             var programadom = document.createElement("option");
@@ -100,12 +108,14 @@ function renderizarArgumento(options) {
             if (programa === options.value)
                 programadom.selected = true;
             entrada.appendChild(programadom);
-        });
+        });        
         contenedor.appendChild(entrada);
     } else {
         if (!multiple) {
             entrada = document.createElement("input");
             entrada.id = options.id;
+            entrada.className = "form-control";
+            entrada.style="background-color: white!important; border-radius: 6px; padding-left: 1rem!important";
             if (options.value)
                 entrada.value = options.value;
             else
@@ -116,19 +126,29 @@ function renderizarArgumento(options) {
             if(!options.value)
               options.value = [];
             options.value.forEach(function(programa) {
+                var inputGroup = document.createElement("div");
+                inputGroup.className = "input-group";  
+                inputGroup.style = "margin-bottom: 0.5rem";
+                var append = document.createElement("div");
+                append.className = "input-group-append";
                 var programadom = document.createElement("input");
-                var br = document.createElement("br");
+                programadom.className = "form-control";  
+                programadom.style = "max-width: 75%; background-color: white;";                
                 programadom.id = options.id + "." + i++;
                 programadom.value = programa;
-                contenedor.appendChild(programadom);
+                //contenedor.appendChild(programadom);
+                inputGroup.appendChild(programadom);
                 if (i != 1) {
                     var eliminar = document.createElement("label");
-                    eliminar.innerHTML = "-";
-                    eliminar.classList.add('remove');
+                    eliminar.innerHTML = '<span class="glyphicon glyphicon-remove"></span>';
+                    eliminar.className = 'remove btn btn-danger';
+                    eliminar.style = "margin-bottom: 0px";
                     eliminar.dataset.for = programadom.id;
-                    contenedor.appendChild(eliminar);
+                    //contenedor.appendChild(eliminar);
+                    append.appendChild(eliminar);                    
                 }
-                contenedor.appendChild(br);
+                inputGroup.appendChild(append);
+                contenedor.appendChild(inputGroup);                
             });
         }
     }

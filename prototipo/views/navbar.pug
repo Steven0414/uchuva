@@ -1,4 +1,4 @@
-nav.navbar.navbar-inverse
+nav.navbar(style="border-radius: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);")
   .container-fluid
     .navbar-header
       button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -7,20 +7,22 @@ nav.navbar.navbar-inverse
         span.icon-bar
         span.icon-bar
       if (!user)
-        a.navbar-brand.hidden-xs(href='/') Uchuva
+        a.navbar-brand(href='/')
+          img#img-fluid(src='./logo.png', style="width: 10rem")
       else
-        a.navbar-brand.hidden-xs(href='/user') Uchuva
+        a.navbar-brand(href='/user')
+          img#img-fluid(src='./logo.png', style="width: 10rem")
     #navbar.navbar-collapse.collapse
       .navbar-form.navbar-right
-        if (user)
-            input.form-control.input-sm(type='text', ng-show='config.searchForm', placeholder="Buscar...", ng-model='$parent.query')
+        if (user)                        
+            button.btn.btn-sm.btn-warning(style="margin-right: 2rem; margin-left: 2rem", href="#", data-toggle="modal", data-target="#ayudaModal")=__('Ayuda')
             button#dropDownMenuLang.btn.btn-default.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='true') #{__('Usuario')} #{user.username}
             ul.dropdown-menu(role='menu', aria-labelledby='dropDownMenuLang')
               li(role='presentation')
-                a(role='menuitem', tabindex='-1', href='/user')= __('Home')
+                a(role='menuitem', tabindex='-1', href='/user')= __('Inicio')
               li(role='presentation')
-                a(role='menuitem', tabindex='-1', href='/developers')= __('Desarrolladores')
+                a(role='menuitem', tabindex='-1', href='/developers', target="_blank")= __('API Desarrolladores')
               li(role='presentation')
-                a(role='menuitem', tabindex='-1', href='/admin/index')= __('Admin')
+                a(role='menuitem', tabindex='-1', href='/admin/index')= __('Administrar')
               li(role='presentation')
-                a(role='menuitem', tabindex='-1', href='/logout')= __('Logout')
+                a(role='menuitem', tabindex='-1', href='/logout')= __('Salir')

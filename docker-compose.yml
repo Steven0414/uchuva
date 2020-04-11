@@ -6,7 +6,7 @@ services:
     build:
       ./prototipo
     image:
-      carlochess/uchuva
+      steven0414/uchuva
     restart:
       always
     volumes:
@@ -21,7 +21,7 @@ services:
       QUEUE : 'amqp://user:password@rabbit'
 
   uchuvaworker:
-    image: carlochess/uchuva
+    image: steven0414/uchuva
     command:
       npm run worker
     volumes_from:

@@ -3,7 +3,7 @@ version: '2'
 services:
   htcondor:
     image:
-      agaveapi/htcondor
+      steven0414/htcondor
     build:
       ./docker/htcondor
     volumes_from:

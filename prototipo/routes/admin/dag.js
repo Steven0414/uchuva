@@ -8,11 +8,11 @@ module.exports = function(app){
   app.use('/admin/dag', router);
   router.get('/', isAuthenticated, function(req, res) {
     Dag.find({})
-      .then((dags) => res.render("admin/dag/index.pug", {dags: dags}));
+      .then((dags) => res.render("admin/dag/index.pug", {dags: dags, user:req.user}));
   });
   router.get('/show/:id', isAuthenticated, function(req, res) {
     Dag.findById(req.params.id)
-      .then((dag) => res.render("admin/dag/detalles.pug", {dag: dag}));
+      .then((dag) => res.render("admin/dag/detalles.pug", {dag: dag, user:req.user}));
   });
   router.get('/destroy/:id', isAuthenticated, function(req, res) {
     Dag.findByIdAndRemove(req.params.id)

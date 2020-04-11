@@ -70,7 +70,7 @@ module.exports = function(app){
           }
           res.format({
               html: function() {
-                  res.render('build', result);
+                  res.render('build', {result:result, user:userId});
               },
               json: function() {
                   res.json(result);

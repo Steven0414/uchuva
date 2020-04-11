@@ -2,7 +2,16 @@ doctype html
 html
   head
     meta(charset='UTF-8')
-    title Swagger UI
+    title Swagger UI - Uchuva
+    //Modal Ayuda
+    script(src='js/ayuda.js')
+    //JQuery
+    script(src='vendor/jquery/jquery.js')
+    //Bootstrap
+    link(href='vendor/bootstrap/bootstrap.min.css', rel='stylesheet', media='screen')
+    script(src='vendor/bootstrap/bootstrap.min.js')
+    link(rel='stylesheet', href='css/style.css') 
+    //Swagger
     link(rel='icon', type='image/png', href='vendor/swagger/images/favicon-32x32.png', sizes='32x32')
     link(rel='icon', type='image/png', href='vendor/swagger/images/favicon-16x16.png', sizes='16x16')
     link(href='vendor/swagger/css/typography.css', media='screen', rel='stylesheet', type='text/css')
@@ -75,9 +84,37 @@ html
             console.log.apply(console, arguments);
           }
         }
-      });
+      });    
   body.swagger-section
-    #header
+    nav.navbar(style="border-radius: 0px; font-family: 'sans-serif'!important")
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          if (!user)
+            a.navbar-brand(href='/')
+              img#img-fluid(src='./logo.png', style="width: 6.5rem")
+          else
+            a.navbar-brand(href='/user')
+              img#img-fluid(src='./logo.png', style="width: 6.5rem")
+        #navbar.navbar-collapse.collapse
+          .navbar-form.navbar-right
+            if (user)                                
+                button#dropDownMenuLang.btn.btn-default.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='true') #{__('Usuario')} #{user.username}                
+                ul.dropdown-menu(role='menu', aria-labelledby='dropDownMenuLang')
+                  li(role='presentation')
+                    a(role='menuitem', tabindex='-1', href='/user')= __('Inicio')
+                  li(role='presentation')
+                    a(role='menuitem', tabindex='-1', href='/developers', target="_blank")= __('API Desarrolladores')
+                  li(role='presentation')
+                    a(role='menuitem', tabindex='-1', href='/admin/index')= __('Administrar')
+                  li(role='presentation')
+                    a(role='menuitem', tabindex='-1', href='/logout')= __('Salir')
+
+    #header(style="height: 50px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);")
       .swagger-ui-wrap
         a#logo(href='/user')
           img.logo__img(alt='swagger', height='30', width='30', src='vendor/swagger/images/logo_small.png')

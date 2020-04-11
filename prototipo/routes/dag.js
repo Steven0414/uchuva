@@ -170,7 +170,8 @@ module.exports = function(app){
                     edges: JSON.stringify(dag.edges),
                     title: dag.nombre,
                     workloader : dag.workloader,
-                    showTutorial : showTutorial
+                    showTutorial : showTutorial,
+                    user:req.user
                 });
               },
               json: function() {

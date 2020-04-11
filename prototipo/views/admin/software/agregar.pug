@@ -28,7 +28,14 @@ block scripts
 
 
 block content
-  h1.page-header Agregar
+  .row
+    br
+    .col-sm-4.col-md-4.col-lg-4(style="padding-left: 1.5rem")
+      a.text-success(href='/user')= __('Inicio / ')        
+      a.text-success(href='/admin/index')= __('Administrar / ')
+      a.text-success(href='/admin/software')= __('Programas / ')
+      a.text-success(href='#')= __('Agregar Programa')
+  h1.page-header Agregar Programa
   .row.placeholders
     button(onclick='render()') Renderizar
     button(onclick='guardar()') Guardar

@@ -20,9 +20,9 @@ function render(programa, node) {
 function renderizarOpciones(opc) {
     var contenedor = document.createElement("fieldset");
     var programas = document.createElement("select");
-    programas.id = opc.id;
+    programas.id = opc.id;    
     var sumador = document.createElement("label");
-    sumador.innerHTML = "+";
+    sumador.innerHTML = "+";    
     sumador.classList.add('add');
     sumador.dataset.for = opc.id;
     var br = document.createElement("br");
@@ -42,10 +42,10 @@ function renderizarOpciones(opc) {
     opc.value.forEach(function(valor) {
         valor.id = opc.id + "." + i++;
         var opcion = renderizarArgumento(valor);
-        var eliminar = document.createElement("label");
+        var eliminar = document.createElement("label");        
         eliminar.innerHTML = "-";
         eliminar.dataset.for = valor.id;
-        eliminar.classList.add('remove');
+        eliminar.classList.add('remove');        
         contenedor.appendChild(eliminar);
         contenedor.appendChild(opcion);
         contenedor.appendChild(br);
@@ -58,18 +58,18 @@ function renderizarArgumento(options) {
         options = {};
     }
     var contenedor = document.createElement("fieldset");
-    var nombre = document.createElement("label");
+    var nombre = document.createElement("label");    
     nombre.innerHTML = options.nombroOpt;
     var br = document.createElement("br");
     var multiple;
     if (options.multiple) {
         multiple = document.createElement("label");
-        multiple.innerHTML = "+";
+        multiple.innerHTML = "+";        
         multiple.classList.add('add');
         multiple.dataset.for = options.id;
     }
     contenedor.appendChild(nombre);
-    if (options.multiple) {
+    if (options.multiple) {        
         contenedor.appendChild(multiple);
     }
     contenedor.appendChild(br);
@@ -124,7 +124,7 @@ function renderizarArgumento(options) {
                 if (i != 1) {
                     var eliminar = document.createElement("label");
                     eliminar.innerHTML = "-";
-                    eliminar.classList.add('remove');
+                    eliminar.classList.add('remove btn btn-danger');
                     eliminar.dataset.for = programadom.id;
                     contenedor.appendChild(eliminar);
                 }
