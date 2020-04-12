@@ -61,9 +61,9 @@ RUN ssh-keygen -A
 # RUN systemctl sshd status
 
 # Install supervisor
-RUN yum update -y
+# RUN yum update -y
 RUN yum -y install epel-release
-RUN yum update -y
+# RUN yum update -y
 RUN yum -y install supervisor
 
 # Conf supervisor
